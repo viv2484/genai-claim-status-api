@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Claims API
-  version: "1.0"
+  version: '1.0'
 paths:
   /claims/{id}:
     get:
@@ -14,6 +14,14 @@ paths:
       responses:
         '200':
           description: Successful response
+      x-amazon-apigateway-integration:
+        uri: http://a8b99f8b693ee4ddabdb2a376caa10cd-1469786273.us-east-1.elb.amazonaws.com/claims/{id}
+        httpMethod: GET
+        type: http_proxy
+        connectionType: INTERNET
+        passthroughBehavior: WHEN_NO_MATCH
+        requestParameters:
+          integration.request.path.id: method.request.path.id
   /claims/{id}/summarize:
     post:
       parameters:
@@ -25,3 +33,9 @@ paths:
       responses:
         '200':
           description: Successful response
+      x-amazon-apigateway-integration:
+        uri: http://a8b99f8b693ee4ddabdb2a376caa10cd-1469786273.us-east-1.elb.amazonaws.com/claims/{id}/summarize
+        httpMethod: POST
+        type: http_proxy
+        connectionType: INTERNET
+        passthroughBehavior: WHEN_NO_MATCH

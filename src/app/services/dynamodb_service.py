@@ -1,7 +1,7 @@
 import boto3
 import os
 
-dynamodb = boto3.resource("dynamodb")
+dynamodb = boto3.resource("dynamodb", region_name="us-east-1")
 TABLE_NAME = os.getenv("CLAIMS_TABLE", "claims-table")
 table = dynamodb.Table(TABLE_NAME)
 

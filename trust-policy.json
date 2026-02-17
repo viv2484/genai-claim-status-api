@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::772648344215:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/22246BCC79CD3BAE2DD0C0F11C4BBE8D"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-east-1.amazonaws.com/id/22246BCC79CD3BAE2DD0C0F11C4BBE8D:sub": "system:serviceaccount:claims-dev:claims-api-sa"
+        }
+      }
+    }
+  ]
+}

@@ -13,19 +13,19 @@ spec:
       labels:
         app: claims-api
     spec:
-      serviceAccountName: claims-sa
+      serviceAccountName: claims-api-sa
       containers:
         - name: claims-api
           image: 772648344215.dkr.ecr.us-east-1.amazonaws.com/claims-api:latest
           ports:
             - containerPort: 8080
           env:
+            - name: AWS_REGION
+              value: "us-east-1"
             - name: CLAIMS_TABLE
               value: claims-table
             - name: NOTES_BUCKET
               value: claims-notes-bucket
-            - name: AWS_REGION
-              value: us-east-1
           resources:
             limits:
               cpu: "500m"

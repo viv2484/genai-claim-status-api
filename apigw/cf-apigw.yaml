@@ -1,0 +1,15 @@
+Resources:
+  ClaimsApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: "claims-api"
+      Body:
+        'Fn::Transform':
+          Name: AWS::Include
+          Parameters:
+            Location: s3://genai-claim-apigw/openapi.yaml
+  ClaimsApiDeployment:
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      RestApiId: !Ref ClaimsApi
+      StageName: dev
