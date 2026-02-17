@@ -15,7 +15,7 @@ paths:
         '200':
           description: Successful response
       x-amazon-apigateway-integration:
-        uri: http://a8b99f8b693ee4ddabdb2a376caa10cd-1469786273.us-east-1.elb.amazonaws.com/claims/{id}
+        uri: http://a8821fb0ba72e41f1bf9e7901ba9eade-2078087435.us-east-1.elb.amazonaws.com/claims/{id}
         httpMethod: GET
         type: http_proxy
         connectionType: INTERNET
@@ -34,7 +34,7 @@ paths:
         '200':
           description: Successful response
       x-amazon-apigateway-integration:
-        uri: http://a8b99f8b693ee4ddabdb2a376caa10cd-1469786273.us-east-1.elb.amazonaws.com/claims/{id}/summarize
+        uri: http://a8821fb0ba72e41f1bf9e7901ba9eade-2078087435.us-east-1.elb.amazonaws.com/claims/{id}/summarize
         httpMethod: POST
         type: http_proxy
         connectionType: INTERNET
