@@ -1,0 +1,8 @@
+[
+  {
+    "claimId": "CLM1001",
+    "status": "OPEN",
+    "amount": 4500,
+    "notesS3Key": "notes/clm1001.txt"
+  }
+]

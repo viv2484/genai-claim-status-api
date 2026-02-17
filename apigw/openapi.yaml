@@ -1,0 +1,27 @@
+openapi: 3.0.1
+info:
+  title: Claims API
+  version: "1.0"
+paths:
+  /claims/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+  /claims/{id}/summarize:
+    post:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response

@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - pip install -r src/requirements.txt
+  build:
+    commands:
+      - docker build -t claims-api ./src
+      - docker tag claims-api:latest $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/claims-api:latest
+  post_build:
+    commands:
+      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/claims-api:latest
