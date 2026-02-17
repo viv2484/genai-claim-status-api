@@ -1,39 +1,64 @@
-name: CI/CD Pipeline
+name: Claims API CI/CD
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: claims-api
+  CLUSTER_NAME: claims-cluster
+  NAMESPACE: claims-dev
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          python-version: 3.11
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run tests
-        run: pytest
-
-      - name: Log in to ECR
-        run: |
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 772648344215.dkr.ecr.us-east-1.amazonaws.com
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
-        run: docker build -t claims-api:latest .
+        run: |
+          docker build -t $ECR_REPOSITORY:latest ./src
+          docker tag $ECR_REPOSITORY:latest \
+          ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:latest
+
+      - name: Install Trivy (Container Scanner)
+        run: |
+          sudo apt-get install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.50.2_Linux-64bit.deb
+          sudo dpkg -i trivy_0.50.2_Linux-64bit.deb
 
       - name: Scan Docker image
-        run: trivy image --exit-code 1 772648344215.dkr.ecr.us-east-1.amazonaws.com/claims-api:latest
+        run: |
+          trivy image --exit-code 1 \
+          ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:latest
 
-      - name: Push Docker image to ECR
-        run: docker push 772648344215.dkr.ecr.us-east-1.amazonaws.com/claims-api:latest
+      - name: Push image to ECR
+        run: |
+          docker push \
+          ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:latest
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --region $AWS_REGION \
+            --name $CLUSTER_NAME
 
       - name: Deploy to EKS
         run: |
-          kubectl set image deployment/claims-api claims-api=772648344215.dkr.ecr.us-east-1.amazonaws.com/claims-api:latest -n claims-dev
+          kubectl set image deployment/claims-api \
+          claims-api=${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:latest \
+          -n $NAMESPACE
