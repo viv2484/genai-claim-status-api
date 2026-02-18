@@ -8,6 +8,9 @@
 - Bedrock for summarization
 
 ## Endpoints
+- EKS on EC2
+- API Gateway → EKS Service
+- DynamoDB for claims
 - GET /claims/{id}
 - POST /claims/{id}/summarize
 
@@ -18,5 +21,6 @@
 
 ## Observability
 CloudWatch logs enabled.
+
 
 
