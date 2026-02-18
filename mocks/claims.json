@@ -4,5 +4,30 @@
     "status": "OPEN",
     "amount": 4500,
     "notesS3Key": "notes/clm1001.txt"
+  },
+  {
+    "claimId": "CLM1002",
+    "status": "OPEN",
+    "amount": 5500,
+    "notesS3Key": "notes/clm1002.txt"
+  },
+  {
+    "claimId": "CLM1003",
+    "status": "OPEN",
+    "amount": 3000,
+    "notesS3Key": "notes/clm1003.txt"
+  },
+  {
+    "claimId": "CLM1004",
+    "status": "OPEN",
+    "amount": 2500,
+    "notesS3Key": "notes/clm1004.txt"
+  },
+  {
+    "claimId": "CLM1005",
+    "status": "OPEN",
+    "amount": 7000,
+    "notesS3Key": "notes/clm1005.txt"
   }
 ]
+
