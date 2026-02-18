@@ -8,8 +8,8 @@
 - Bedrock for summarization
 
 ## Endpoints
-GET /claims/{id}
-POST /claims/{id}/summarize
+- GET /claims/{id}
+- POST /claims/{id}/summarize
 
 ## Deployment
 1. Terraform apply
@@ -18,4 +18,5 @@ POST /claims/{id}/summarize
 
 ## Observability
 CloudWatch logs enabled.
+
 
