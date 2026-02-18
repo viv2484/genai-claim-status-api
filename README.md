@@ -12,9 +12,10 @@ GET /claims/{id}
 POST /claims/{id}/summarize
 
 ## Deployment
-1. terraform apply
+1. Terraform apply
 2. kubectl apply -f k8s/
-3. Push via CodePipeline
+3. Push via Github Action wokflow
 
 ## Observability
 CloudWatch logs enabled.
+
