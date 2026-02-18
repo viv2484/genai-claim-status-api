@@ -1,4 +1,0 @@
-fields @timestamp, @message
-| filter level="ERROR"
-| sort @timestamp desc
-| limit 50
