@@ -1,3 +1,15 @@
-{
-  "notes/clm1001.txt": "Customer reported water damage due to pipe burst..."
-}
+[
+  {
+    "notes/clm1001.txt": "Customer reported water damage due to pipe burst"
+  },
+  {
+    "notes/clm1002.txt": "The customer reported a rear-end collision at traffic signal"
+  },
+  {
+    "notes/clm1003.txt": "Fire damage reported in garage due to electrical short circuit"
+  },
+  {
+    "notes/clm1004.txt": "Emergency hospitalization due to appendicitis"
+  }
+]
+
